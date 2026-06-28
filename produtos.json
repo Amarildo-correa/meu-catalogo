@@ -1,56 +1,56 @@
 [
   {
     "id": 1,
-    "nome": "Conjunto Floral Verão",
-    "categoria": "Conjuntos",
-    "preco": 89.90,
-    "descricao": "Blusa + short floral, tecido leve e fresco",
+    "nome": "Pijama puff",
+    "categoria": "Pijamas",
+    "preco": 55,00,
+    "descricao": "blusinha cropped e short, tecido leve e fresco",
     "disponivel": true,
-    "imagem": "https://placehold.co/400x500/F5E6E0/C8637A?text=Conjunto+Floral"
+    "imagem": "https://http2.mlstatic.com/D_NQ_NP_2X_743683-MLB97944987442_112025-F-conjunto-pijama-feminino-adulto-ursinho-puff-blusa-e-short.webp"
   },
   {
     "id": 2,
-    "nome": "Vestido Midi Rose",
-    "categoria": "Vestidos",
-    "preco": 129.90,
-    "descricao": "Vestido midi com fenda lateral, ideal para qualquer ocasião",
+    "nome": "calcinha borboleta",
+    "categoria": "Calcinhas",
+    "preco": 40,00,
+    "descricao": "Calcinha Borboleta fio",
     "disponivel": true,
-    "imagem": "https://placehold.co/400x500/F5E6E0/C8637A?text=Vestido+Midi"
+    "imagem": "https://dcdn-us.mitiendanube.com/stores/002/971/987/products/img_3510-e6e488c98ebc43f3fe17800773266096-480-0.webp"
   },
   {
     "id": 3,
-    "nome": "Blusa Cropped Linho",
-    "categoria": "Blusas",
+    "nome": "lanjerie renda + cinta liga",
+    "categoria": "Calcinhas",
     "preco": 49.90,
-    "descricao": "Blusa cropped em linho, fresquinha e estilosa",
+    "descricao": "lanjerie veste muito bem, renda super leve",
     "disponivel": true,
-    "imagem": "https://placehold.co/400x500/F5E6E0/C8637A?text=Blusa+Cropped"
+    "imagem": "https://www.lojastyleme.com.br/cdn/shop/products/Conjunto-Lingerie-de-Renda-Cinta-Liga-Luxury_2.jpg?v=1680560642&width=416"
   },
   {
     "id": 4,
-    "nome": "Calça Wide Leg Bege",
-    "categoria": "Calças",
+    "nome": "Lanjerie ximena",
+    "categoria": "Calcinhas",
     "preco": 99.90,
-    "descricao": "Calça pantalona bege, confortável e elegante",
+    "descricao": "tecido azul levinho, extremamente luxuosa",
     "disponivel": true,
-    "imagem": "https://placehold.co/400x500/F5E6E0/C8637A?text=Cal%C3%A7a+Wide"
+    "imagem": "https://ponderada.com.br/cdn/shop/files/Conjunto-de-Lingerie-Sensual-Ximena-13.jpg?v=1688592599&width=1445"
   },
   {
     "id": 5,
-    "nome": "Saia Midi Plissada",
-    "categoria": "Saias",
-    "preco": 79.90,
-    "descricao": "Saia midi plissada, fluida e romântica",
+    "nome": "Pijama peluciado",
+    "categoria": "Pijamas",
+    "preco": 200,00
+    "descricao": "pijama peluciado rosa",
     "disponivel": true,
-    "imagem": "https://placehold.co/400x500/F5E6E0/C8637A?text=Saia+Plissada"
+    "imagem": "https://www.casaassuf.com.br/wp-content/uploads/2021/06/tecidos-mais-indicados-para-pijamas-de-inverno-casa-assuf-foto-reproducao-internet3.jpg"
   },
   {
     "id": 6,
-    "nome": "Vestido Festa Bordô",
-    "categoria": "Vestidos",
-    "preco": 189.90,
-    "descricao": "Vestido longo com alças finas, perfeito para festas",
+    "nome": "Splash vitória secrets Coconutt Passion",
+    "categoria": "Perfumaria",
+    "preco": 200,00
+    "descricao": "",
     "disponivel": false,
-    "imagem": "https://placehold.co/400x500/D4A96A/FDFAF9?text=Esgotado"
+    "imagem": "https://http2.mlstatic.com/D_NQ_NP_737833-MLB112280606863_052026-O.webp"
   }
 ]
