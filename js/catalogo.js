@@ -52,26 +52,37 @@ function renderGrid() {
           <p class="card-cat">${p.categoria}</p>
           <h2 class="card-nome">${p.nome}</h2>
           <p class="card-desc">${p.descricao}</p>
-       <div class="card-rodape">
-  <span class="card-preco">${formatBRL(p.preco)}</span>
-  <div style="display:flex;gap:6px;align-items:center;">
-    ${esg
-      ? ""
-      : sel
-        ? `<button class="card-btn rem" data-id="${p.id}" title="Remover">−</button>`
-        : `<button class="card-btn" data-id="${p.id}" title="Adicionar">+</button>`
-    }
-    ${!esg ? `<button class="card-whats" data-id="${p.id}" title="WhatsApp">
-      <i class="fab fa-whatsapp"></i>
-    </button>` : ""}
-  </div>
-</div>;
+          <div class="card-rodape">
+            <span class="card-preco">${formatBRL(p.preco)}</span>
+            <div style="display:flex;gap:6px;align-items:center;">
+              ${esg
+                ? ""
+                : sel
+                  ? `<button class="card-btn rem" data-id="${p.id}" title="Remover">−</button>`
+                  : `<button class="card-btn" data-id="${p.id}" title="Adicionar">+</button>`
+              }
+              ${!esg ? `<button class="card-whats" data-id="${p.id}" title="WhatsApp"><i class="fab fa-whatsapp"></i></button>` : ""}
+            </div>
+          </div>
+        </div>
+      </div>`;
   }).join("");
  
   grid.querySelectorAll(".card-btn").forEach(btn => {
     btn.addEventListener("click", e => {
       e.stopPropagation();
       toggleCarrinho(Number(btn.dataset.id));
+    });
+  });
+ 
+  grid.querySelectorAll(".card-whats").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      const id = Number(btn.dataset.id);
+      const p = produtos.find(x => x.id === id);
+      if (!p) return;
+      const msg = `Olá! Tenho interesse no produto: *${p.nome}* — ${formatBRL(p.preco)} 😊`;
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
     });
   });
  
@@ -103,7 +114,6 @@ function atualizarBarra() {
   else bar.classList.remove("visivel");
 }
  
-// LIGHTBOX
 function abrirLightbox(id) {
   const p = produtos.find(x => x.id === id);
   if (!p) return;
@@ -132,7 +142,6 @@ document.getElementById("lightbox").addEventListener("click", e => {
   if (e.target === e.currentTarget) fecharLightbox();
 });
  
-// MODAL PEDIDO
 document.getElementById("btnPedido").addEventListener("click", abrirModal);
 document.getElementById("modalFechar").addEventListener("click", fecharModal);
 document.getElementById("modalOverlay").addEventListener("click", e => {
@@ -179,3 +188,4 @@ function formatBRL(v) {
 }
  
 init();
+ 
