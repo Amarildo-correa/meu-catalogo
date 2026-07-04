@@ -165,6 +165,13 @@ function abrirModal() {
  
 function fecharModal() {
   document.getElementById("modalOverlay").classList.remove("aberto");
+  document.getElementById("btnLimpar").addEventListener("click", () => {
+  carrinho = [];
+  localStorage.removeItem("carrinho");
+  renderGrid();
+  atualizarBarra();
+  fecharModal();
+});
 }
  
 function gerarTexto(itens, soma) {
