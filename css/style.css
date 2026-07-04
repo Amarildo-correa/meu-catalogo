@@ -1,9 +1,9 @@
+
 :root {
   --nude:    #F5E6E0;
   --creme:   #FDFAF9;
-  --rosa:    #D4A96A;
-  --rosa-dk: #B8923A;
   --dourado: #D4A96A;
+  --dourado-dk: #B8923A;
   --grafite: #2D2D2D;
   --cinza:   #8A8A8A;
   --borda:   #E8D6CE;
@@ -20,12 +20,6 @@ body {
   padding-bottom: 90px;
 }
 
-.header {
-  background: var(--nude);
-  text-align: center;
-  padding: 48px 20px 36px;
-  border-bottom: 1px solid var(--borda);
-}
 .header-eyebrow {
   font-size: 16px;
   letter-spacing: 3px;
@@ -33,13 +27,6 @@ body {
   color: var(--dourado);
   font-weight: 500;
   margin-bottom: 10px;
-}
-.header-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 3.2rem);
-  font-weight: 600;
-  color: var(--grafite);
-  line-height: 1.1;
 }
 .header-sub {
   margin-top: 12px;
@@ -68,10 +55,10 @@ body {
   white-space: nowrap;
   transition: all .2s;
 }
-.filtro-btn:hover { border-color: var(--rosa); color: var(--rosa); }
+.filtro-btn:hover { border-color: var(--dourado); color: var(--dourado); }
 .filtro-btn.ativo {
-  background: var(--rosa);
-  border-color: var(--rosa);
+  background: var(--dourado);
+  border-color: var(--dourado);
   color: white;
   font-weight: 500;
 }
@@ -94,9 +81,9 @@ body {
   transition: transform .2s, box-shadow .2s;
   cursor: pointer;
 }
-.card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(200,99,122,.12); }
+.card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(212,169,106,.2); }
 .card.esgotado { opacity: .65; cursor: default; }
-.card.selecionado { border: 2px solid var(--rosa); box-shadow: 0 0 0 3px rgba(200,99,122,.15); }
+.card.selecionado { border: 2px solid var(--dourado); box-shadow: 0 0 0 3px rgba(212,169,106,.2); }
 
 .card-img {
   width: 100%;
@@ -144,7 +131,7 @@ body {
   height: 30px;
   border-radius: 50%;
   border: none;
-  background: #D4A96A;
+  background: var(--dourado);
   color: white;
   font-size: 18px;
   line-height: 1;
@@ -154,9 +141,7 @@ body {
   justify-content: center;
   transition: background .2s;
 }
-.card-btn:hover { background: #B8923A; }
-.card-btn.rem { background: var(--grafite); font-size: 16px; }
-.card-btn:hover { background: var(--rosa-dk); }
+.card-btn:hover { background: var(--dourado-dk); }
 .card-btn.rem { background: var(--grafite); font-size: 16px; }
 
 .badge-esgotado {
@@ -175,7 +160,7 @@ body {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: var(--rosa);
+  background: var(--dourado);
   color: white;
   font-size: 12px;
   width: 22px;
@@ -185,7 +170,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 
 .carrinho-bar {
   position: fixed;
@@ -205,7 +189,7 @@ body {
 .carrinho-info span:first-child { font-size: 12px; color: #aaa; }
 .carrinho-info span:last-child { font-weight: 600; font-size: 16px; }
 .btn-pedido {
-  background: var(--rosa);
+  background: var(--dourado);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -216,20 +200,7 @@ body {
   cursor: pointer;
   transition: background .2s;
 }
-
-.btn-pedido {
-  background: #D4A96A;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background .2s;
-}
-.btn-pedido:hover { background: #B8923A; }
+.btn-pedido:hover { background: var(--dourado-dk); }
 
 .modal-overlay {
   position: fixed;
@@ -277,7 +248,7 @@ body {
   border-bottom: 1px solid var(--borda);
   font-size: 14px;
 }
-.modal-item span:last-child { font-weight: 600; color: var(--rosa); }
+.modal-item span:last-child { font-weight: 600; color: var(--dourado); }
 .modal-total {
   display: flex;
   justify-content: space-between;
@@ -367,6 +338,22 @@ body {
   font-size: 16px;
   color: var(--dourado);
   font-weight: 600;
+}
+.lightbox-whats {
+  margin-top: 20px;
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background .2s;
 }
 .lightbox-whats:hover { background: #1ebe5d; }
 
