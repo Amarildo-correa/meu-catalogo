@@ -161,6 +161,12 @@ function abrirModal() {
   document.getElementById("modalTotalValor").textContent = formatBRL(soma);
   document.getElementById("modalTexto").value = gerarTexto(itens, soma);
   document.getElementById("modalOverlay").classList.add("aberto");
+  carrinho = [];
+  localStorage.removeItem("carrinho");
+  renderGrid();
+  atualizarBarra();
+  fecharModal();
+};
 }
  
 document.getElementById("btnLimpar").addEventListener("click", () => {
