@@ -10,7 +10,7 @@
   --font-display: 'Playfair Display', serif;
   --font-body:    'Inter', sans-serif;
 }
-
+ 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: var(--font-body);
@@ -19,7 +19,7 @@ body {
   min-height: 100vh;
   padding-bottom: 90px;
 }
-
+ 
 .header-eyebrow {
   font-size: 16px;
   letter-spacing: 3px;
@@ -34,7 +34,7 @@ body {
   color: var(--cinza);
   font-weight: 300;
 }
-
+ 
 .filtros {
   display: flex;
   gap: 8px;
@@ -62,7 +62,7 @@ body {
   color: white;
   font-weight: 500;
 }
-
+ 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
@@ -71,7 +71,7 @@ body {
   max-width: 900px;
   margin: 0 auto;
 }
-
+ 
 .card {
   background: white;
   border-radius: 12px;
@@ -84,7 +84,7 @@ body {
 .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(212,169,106,.2); }
 .card.esgotado { opacity: .65; cursor: default; }
 .card.selecionado { border: 2px solid var(--dourado); box-shadow: 0 0 0 3px rgba(212,169,106,.2); }
-
+ 
 .card-img {
   width: 100%;
   aspect-ratio: 4/5;
@@ -92,7 +92,7 @@ body {
   display: block;
   background: var(--nude);
 }
-
+ 
 .card-corpo {
   padding: 12px 14px 16px;
   border-top: 2px dashed var(--borda);
@@ -143,7 +143,7 @@ body {
 }
 .card-btn:hover { background: var(--dourado-dk); }
 .card-btn.rem { background: var(--grafite); font-size: 16px; }
-
+ 
 .badge-esgotado {
   position: absolute;
   top: 10px;
@@ -170,7 +170,7 @@ body {
   align-items: center;
   justify-content: center;
 }
-
+ 
 .carrinho-bar {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -201,7 +201,7 @@ body {
   transition: background .2s;
 }
 .btn-pedido:hover { background: var(--dourado-dk); }
-
+ 
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -285,12 +285,12 @@ body {
 .btn-copiar:hover { background: var(--borda); }
 .btn-whats { background: #25D366; color: white; }
 .btn-whats:hover { background: #1ebe5d; }
-
+ 
 @media (min-width: 520px) {
   .modal { border-radius: 20px; margin: 20px; }
   .modal-overlay { align-items: center; }
 }
-
+ 
 .lightbox {
   position: fixed;
   inset: 0;
@@ -356,7 +356,7 @@ body {
   transition: background .2s;
 }
 .lightbox-whats:hover { background: #1ebe5d; }
-
+ 
 .card-whats {
   width: 30px;
   height: 30px;
