@@ -13,6 +13,7 @@ async function init() {
     produtos = await res.json();
     renderFiltros();
     renderGrid();
+   atualizarBarra();
   } catch (e) {
     document.getElementById("grid").innerHTML =
       '<p style="padding:20px;color:#888">Erro ao carregar produtos.</p>';
