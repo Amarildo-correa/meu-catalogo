@@ -144,7 +144,7 @@ body {
   height: 30px;
   border-radius: 50%;
   border: none;
-  background: var(--rosa);
+  background: #D4A96A;
   color: white;
   font-size: 18px;
   line-height: 1;
@@ -154,6 +154,8 @@ body {
   justify-content: center;
   transition: background .2s;
 }
+.card-btn:hover { background: #B8923A; }
+.card-btn.rem { background: var(--grafite); font-size: 16px; }
 .card-btn:hover { background: var(--rosa-dk); }
 .card-btn.rem { background: var(--grafite); font-size: 16px; }
 
@@ -214,8 +216,20 @@ body {
   cursor: pointer;
   transition: background .2s;
 }
-.btn-pedido:hover { background: var(--rosa-dk); }
 
+.btn-pedido {
+  background: #D4A96A;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .2s;
+}
+.btn-pedido:hover { background: #B8923A; }
 
 .modal-overlay {
   position: fixed;
