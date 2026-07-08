@@ -1,3 +1,4 @@
+
 :root {
   --nude:       #F5E6E0;
   --creme:      #FDFAF9;
@@ -37,8 +38,8 @@ body {
 /* ===== BANNER ROTATIVO ===== */
 .banner-slider {
   position: relative;
-  overflow: hidden;
   background: #111;
+  overflow: hidden;
 }
 .banner-track {
   display: flex;
@@ -47,55 +48,33 @@ body {
 .banner-slide {
   min-width: 100%;
   flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 40px 20px 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 36px 48px 48px;
-  box-sizing: border-box;
+  word-break: break-word;
 }
-.banner-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.75;
-}
-.banner-slide-info {
-  position: absolute;
-  bottom: 16px;
-  left: 0; right: 0;
-  text-align: center;
-  color: white;
-}
-.banner-slide-info p {
-  font-family: var(--font-display);
-  font-size: 18px;
-  letter-spacing: 2px;
-  text-shadow: 0 1px 6px rgba(0,0,0,.5);
-}
-.banner-slide-info span {
-  font-size: 13px;
-  color: var(--dourado);
-  font-weight: 500;
-}
+.banner-slide p { word-break: break-word; }
 .banner-nav {
   position: absolute;
   top: 50%; transform: translateY(-50%);
   background: rgba(0,0,0,.4);
   color: white;
   border: none;
-  width: 32px; height: 32px;
+  width: 28px; height: 28px;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
   z-index: 10;
   display: flex; align-items: center; justify-content: center;
   transition: background .2s;
 }
 .banner-nav:hover { background: rgba(0,0,0,.7); }
-.banner-nav.prev { left: 10px; }
-.banner-nav.next { right: 10px; }
+.banner-nav.prev { left: 6px; }
+.banner-nav.next { right: 6px; }
 .banner-dots {
   position: absolute;
   bottom: 10px; left: 0; right: 0;
@@ -110,16 +89,6 @@ body {
   transition: background .2s;
 }
 .banner-dot.ativo { background: var(--dourado); }
-
-@media (max-width: 600px) {
-  .banner-slide {
-    padding: 28px 16px 44px;
-  }
-  .banner-nav {
-    width: 26px; height: 26px;
-    font-size: 16px;
-  }
-}
 
 /* ===== BARRA PROGRESSO ===== */
 .progresso-bar {
@@ -242,7 +211,6 @@ body {
   display: block;
   background: var(--nude);
 }
-
 .card-corpo {
   padding: 12px 14px 16px;
   border-top: 2px dashed var(--borda);
@@ -337,7 +305,6 @@ body {
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
 }
-
 .card-whats {
   width: 30px; height: 30px;
   border-radius: 50%;
