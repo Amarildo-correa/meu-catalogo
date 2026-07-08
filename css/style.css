@@ -1,4 +1,3 @@
-
 :root {
   --nude:       #F5E6E0;
   --creme:      #FDFAF9;
@@ -39,22 +38,22 @@ body {
 .banner-slider {
   position: relative;
   overflow: hidden;
-  height: auto;
-  min-height: 180px;
   background: #111;
 }
 .banner-track {
   display: flex;
-  height: 100%;
   transition: transform .5s ease;
 }
 .banner-slide {
   min-width: 100%;
-  height: auto;
-  min-height: 180px;
-  position: relative;
   flex-shrink: 0;
-  padding: 28px 20px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px 48px 48px;
+  box-sizing: border-box;
 }
 .banner-slide img {
   width: 100%;
@@ -99,7 +98,7 @@ body {
 .banner-nav.next { right: 10px; }
 .banner-dots {
   position: absolute;
-  bottom: 8px; left: 0; right: 0;
+  bottom: 10px; left: 0; right: 0;
   display: flex; justify-content: center; gap: 6px;
 }
 .banner-dot {
@@ -111,6 +110,16 @@ body {
   transition: background .2s;
 }
 .banner-dot.ativo { background: var(--dourado); }
+
+@media (max-width: 600px) {
+  .banner-slide {
+    padding: 28px 16px 44px;
+  }
+  .banner-nav {
+    width: 26px; height: 26px;
+    font-size: 16px;
+  }
+}
 
 /* ===== BARRA PROGRESSO ===== */
 .progresso-bar {
