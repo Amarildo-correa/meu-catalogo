@@ -1,3 +1,4 @@
+
 const WHATSAPP = "5551986489731";
 const NOME_LOJA = "Use Isis";
 const MAX_ITENS = 10;
@@ -54,9 +55,9 @@ function initBanner() {
 
   track.innerHTML = slides.map(s => `
     <div class="banner-slide" style="background:${s.bg};">
-      <p style="font-size:10px;letter-spacing:4px;color:#D4A96A;text-transform:uppercase;margin:0 0 10px;font-family:'Inter',sans-serif;">${s.eyebrow}</p>
-      <p style="font-family:'Playfair Display',serif;font-size:18px;color:#F5E6E0;margin:0 0 10px;line-height:1.4;">${s.titulo}</p>
-      <p style="font-size:13px;color:#aaa;margin:0;line-height:1.6;font-family:'Inter',sans-serif;">${s.texto}</p>
+      <p class="banner-eyebrow">${s.eyebrow}</p>
+      <p class="banner-titulo">${s.titulo}</p>
+      <p class="banner-texto">${s.texto}</p>
     </div>`).join("");
 
   dots.innerHTML = slides.map((_, i) =>
@@ -88,25 +89,30 @@ function irParaSlide(idx) {
 }
 
 // ===================== DARK MODE =====================
-function initDarkMode() {
+function aplicarCoresHeader(isDark) {
   const header = document.getElementById("siteHeader");
+  if (!header) return;
+  header.style.background = isDark ? "#1a1a1a" : "#F5E6E0";
+  header.querySelectorAll(".header-texto").forEach(el => {
+    el.style.color = isDark ? "#C49A6C" : "#8B5E3C";
+  });
+}
+
+function initDarkMode() {
   const dark = localStorage.getItem("darkMode") === "1";
-  if (dark) {
-    document.body.classList.add("dark");
-    if (header) header.style.background = "#1a1a1a";
-  }
+  if (dark) document.body.classList.add("dark");
+  aplicarCoresHeader(dark);
+
   document.getElementById("darkToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
-    if (header) header.style.background = isDark ? "#1a1a1a" : "#F5E6E0";
+    aplicarCoresHeader(isDark);
     localStorage.setItem("darkMode", isDark ? "1" : "0");
     const icon = document.querySelector("#darkToggle i");
     icon.className = isDark ? "fas fa-sun" : "fas fa-moon";
-    document.querySelectorAll(".header-texto").forEach(el => {
-  el.style.color = isDark ? "#C49A6C" : "#8B5E3C";
-});
   });
 }
+
 // ===================== FILTROS =====================
 function renderFiltros() {
   const cats = ["Todos", ...new Set(produtos.map(p => p.categoria))];
