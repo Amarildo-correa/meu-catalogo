@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Catálogo digital Use Isis — moda feminina. Selecione produtos e faça seu pedido pelo WhatsApp." />
   <title>Catálogo — Use Isis</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -11,19 +12,19 @@
 </head>
 <body>
 
-<header id="siteHeader" style="background:#F5E6E0;padding:48px 20px 40px;text-align:center;width:100%;transition:background .3s;">
-  <p style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:#8B5E3C;letter-spacing:10px;margin:0 0 4px;text-transform:uppercase;">use</p>
-<p style="font-family:'Playfair Display',serif;font-size:72px;font-weight:400;color:#8B5E3C;letter-spacing:12px;margin:0;line-height:1;">ISIS</p>
-<div style="width:60px;height:1px;background:#D4A96A;margin:14px auto;"></div>
-<p style="font-size:18px;letter-spacing:4px;color:#8B5E3C;margin:0 0 16px;text-transform:uppercase;font-family:'Playfair Display',serif;">moda feminina</p>
-<p style="font-size:13px;color:#8A8A8A;margin:0;font-family:'Inter',sans-serif;">Selecione os itens e envie seu pedido pelo WhatsApp <i class="fab fa-whatsapp" style="color:#25D366;"></i></p>
+<header id="siteHeader" class="site-header">
+  <p class="header-pre">use</p>
+  <p class="header-nome">ISIS</p>
+  <div class="header-divider"></div>
+  <p class="header-subtitulo">moda feminina</p>
+  <p class="header-instrucao">Selecione os itens e envie seu pedido pelo WhatsApp <i class="fab fa-whatsapp" style="color:#25D366;"></i></p>
 </header>
 
   <!-- BANNER ROTATIVO -->
   <div class="banner-slider">
     <div class="banner-track" id="bannerTrack"></div>
-    <button class="banner-nav prev" id="bannerPrev">&#8249;</button>
-    <button class="banner-nav next" id="bannerNext">&#8250;</button>
+    <button class="banner-nav prev" id="bannerPrev" aria-label="Slide anterior">&#8249;</button>
+    <button class="banner-nav next" id="bannerNext" aria-label="Próximo slide">&#8250;</button>
     <div class="banner-dots" id="bannerDots"></div>
   </div>
 
@@ -35,27 +36,33 @@
 
   <!-- FILTROS -->
   <div class="filtros-wrapper">
-    <nav class="filtros" id="filtros">
+    <nav class="filtros" id="filtros" aria-label="Filtrar por categoria">
       <button class="filtro-btn ativo" data-cat="Todos">Todos</button>
     </nav>
     <div class="filtros-extra">
-      <select class="filtro-preco" id="filtroPreco">
+      <select class="filtro-preco" id="filtroPreco" aria-label="Filtrar por preço">
         <option value="0">Preço</option>
         <option value="50">Até R$50</option>
         <option value="100">Até R$100</option>
         <option value="200">Até R$200</option>
       </select>
-      <button class="filtro-fav-btn" id="filtroFav" title="Ver favoritos">
+      <button class="filtro-fav-btn" id="filtroFav" aria-label="Ver favoritos">
         <i class="fas fa-heart"></i>
       </button>
     </div>
   </div>
 
+  <!-- BUSCA -->
+  <div class="busca-wrapper">
+    <i class="fas fa-search busca-icone"></i>
+    <input type="search" id="busca" class="busca-input" placeholder="Buscar produto..." aria-label="Buscar produto" />
+  </div>
+
   <!-- GRID DE PRODUTOS -->
-  <main class="grid" id="grid"></main>
+  <main class="grid" id="grid" aria-label="Produtos"></main>
 
   <!-- RODAPÉ CARRINHO -->
-  <div class="carrinho-bar" id="carrinhoBar">
+  <div class="carrinho-bar" id="carrinhoBar" aria-live="polite">
     <div class="carrinho-info">
       <span id="carrinhoCount">0 itens</span>
       <span id="carrinhoTotal">R$ 0,00</span>
@@ -64,16 +71,15 @@
   </div>
 
   <!-- MODAL PEDIDO -->
-  <div class="modal-overlay" id="modalOverlay">
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTituloEl">
     <div class="modal">
-      <button class="modal-fechar" id="modalFechar">✕</button>
+      <button class="modal-fechar" id="modalFechar" aria-label="Fechar pedido">✕</button>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <h2 class="modal-titulo" style="margin:0;">Seu Pedido</h2>
-        <button id="btnLimpar" style="background:none;border:1px solid #E8D6CE;color:#8A8A8A;font-size:12px;padding:5px 12px;border-radius:20px;cursor:pointer;">Limpar tudo</button>
+        <h2 class="modal-titulo" id="modalTituloEl" style="margin:0;">Seu Pedido</h2>
+        <button id="btnLimpar" class="btn-limpar">Limpar tudo</button>
       </div>
-      <!-- CAMPO NOME -->
       <div style="margin-bottom:14px;">
-        <input id="nomeCliente" type="text" placeholder="Seu nome (opcional)" style="width:100%;border:1px solid #E8D6CE;border-radius:8px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:13px;color:#2D2D2D;background:#FDFAF9;outline:none;" />
+        <input id="nomeCliente" type="text" class="nome-input" placeholder="Seu nome (opcional)" />
       </div>
       <div id="modalItens"></div>
       <div class="modal-total">
@@ -90,8 +96,8 @@
   </div>
 
   <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-fechar" id="lightboxFechar">✕</button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox-fechar" id="lightboxFechar" aria-label="Fechar imagem">✕</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="" />
     <div class="lightbox-info">
       <p class="lightbox-nome" id="lightboxNome"></p>
@@ -101,7 +107,7 @@
   </div>
 
   <!-- BOTÃO DARK MODE -->
-  <button class="dark-toggle" id="darkToggle" title="Alternar modo escuro">
+  <button class="dark-toggle" id="darkToggle" aria-label="Alternar modo escuro">
     <i class="fas fa-moon"></i>
   </button>
 

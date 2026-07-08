@@ -9,8 +9,10 @@ let favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
 let filtroAtivo = "Todos";
 let filtroPrecoDe = 0;
 let mostrarFavoritos = false;
+let termoBusca = "";
 let bannerAtual = 0;
 let bannerTimer = null;
+let bannerTotal = 0;
 
 async function init() {
   try {
@@ -50,6 +52,7 @@ function initBanner() {
     }
   ];
 
+  bannerTotal = slides.length;
   const track = document.getElementById("bannerTrack");
   const dots = document.getElementById("bannerDots");
 
@@ -61,18 +64,22 @@ function initBanner() {
     </div>`).join("");
 
   dots.innerHTML = slides.map((_, i) =>
-    `<button class="banner-dot${i === 0 ? " ativo" : ""}" onclick="irParaSlide(${i})"></button>`
+    `<button class="banner-dot${i === 0 ? " ativo" : ""}" data-slide="${i}" aria-label="Ir para slide ${i + 1}"></button>`
   ).join("");
 
+  dots.querySelectorAll(".banner-dot").forEach(dot => {
+    dot.addEventListener("click", () => irParaSlide(Number(dot.dataset.slide)));
+  });
+
   document.getElementById("bannerPrev").addEventListener("click", () => {
-    irParaSlide((bannerAtual - 1 + slides.length) % slides.length);
+    irParaSlide((bannerAtual - 1 + bannerTotal) % bannerTotal);
   });
   document.getElementById("bannerNext").addEventListener("click", () => {
-    irParaSlide((bannerAtual + 1) % slides.length);
+    irParaSlide((bannerAtual + 1) % bannerTotal);
   });
 
   bannerTimer = setInterval(() => {
-    irParaSlide((bannerAtual + 1) % slides.length);
+    irParaSlide((bannerAtual + 1) % bannerTotal);
   }, 4000);
 }
 
@@ -84,29 +91,18 @@ function irParaSlide(idx) {
   });
   clearInterval(bannerTimer);
   bannerTimer = setInterval(() => {
-    irParaSlide((bannerAtual + 1) % 3);
+    irParaSlide((bannerAtual + 1) % bannerTotal);
   }, 4000);
 }
 
 // ===================== DARK MODE =====================
-function aplicarCoresHeader(isDark) {
-  const header = document.getElementById("siteHeader");
-  if (!header) return;
-  header.style.background = isDark ? "#1a1a1a" : "#F5E6E0";
-  header.querySelectorAll(".header-texto").forEach(el => {
-    el.style.color = isDark ? "#C49A6C" : "#8B5E3C";
-  });
-}
-
 function initDarkMode() {
   const dark = localStorage.getItem("darkMode") === "1";
   if (dark) document.body.classList.add("dark");
-  aplicarCoresHeader(dark);
 
   document.getElementById("darkToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
-    aplicarCoresHeader(isDark);
     localStorage.setItem("darkMode", isDark ? "1" : "0");
     const icon = document.querySelector("#darkToggle i");
     icon.className = isDark ? "fas fa-sun" : "fas fa-moon";
@@ -139,6 +135,11 @@ function renderFiltros() {
     document.getElementById("filtroFav").classList.toggle("ativo", mostrarFavoritos);
     renderGrid();
   });
+
+  document.getElementById("busca").addEventListener("input", e => {
+    termoBusca = e.target.value.toLowerCase().trim();
+    renderGrid();
+  });
 }
 
 // ===================== GRID =====================
@@ -149,15 +150,30 @@ function renderGrid() {
 
   if (filtroPrecoDe > 0) lista = lista.filter(p => p.preco <= filtroPrecoDe);
   if (mostrarFavoritos) lista = lista.filter(p => favoritos.includes(p.id));
+  if (termoBusca) lista = lista.filter(p =>
+    p.nome.toLowerCase().includes(termoBusca) ||
+    p.descricao.toLowerCase().includes(termoBusca) ||
+    p.categoria.toLowerCase().includes(termoBusca)
+  );
 
   const grid = document.getElementById("grid");
+
+  if (lista.length === 0) {
+    grid.innerHTML = `
+      <div class="estado-vazio">
+        <i class="fas fa-search"></i>
+        <p>Nenhum produto encontrado</p>
+      </div>`;
+    return;
+  }
+
   grid.innerHTML = lista.map(p => {
     const sel = carrinho.includes(p.id);
     const esg = !p.disponivel;
     const fav = favoritos.includes(p.id);
     return `
       <div class="card${esg ? " esgotado" : ""}${sel ? " selecionado" : ""}" data-id="${p.id}">
-        <button class="card-fav${fav ? " favoritado" : ""}" data-id="${p.id}" title="Favoritar">
+        <button class="card-fav${fav ? " favoritado" : ""}" data-id="${p.id}" aria-label="${fav ? "Remover dos favoritos" : "Adicionar aos favoritos"}">
           <i class="${fav ? "fas" : "far"} fa-heart"></i>
         </button>
         <img class="card-img" src="${p.imagem}" alt="${p.nome}" loading="lazy" data-lightbox="${p.id}" />
@@ -173,10 +189,10 @@ function renderGrid() {
               ${esg
                 ? ""
                 : sel
-                  ? `<button class="card-btn rem" data-id="${p.id}" title="Remover">−</button>`
-                  : `<button class="card-btn" data-id="${p.id}" title="Adicionar">+</button>`
+                  ? `<button class="card-btn rem" data-id="${p.id}" aria-label="Remover do carrinho">−</button>`
+                  : `<button class="card-btn" data-id="${p.id}" aria-label="Adicionar ao carrinho">+</button>`
               }
-              ${!esg ? `<button class="card-whats" data-id="${p.id}" title="WhatsApp"><i class="fab fa-whatsapp"></i></button>` : ""}
+              ${!esg ? `<button class="card-whats" data-id="${p.id}" aria-label="Pedir pelo WhatsApp"><i class="fab fa-whatsapp"></i></button>` : ""}
             </div>
           </div>
         </div>
@@ -223,11 +239,14 @@ function renderGrid() {
 // ===================== CARRINHO =====================
 function toggleCarrinho(id) {
   const idx = carrinho.indexOf(id);
-  if (idx === -1) carrinho.push(id);
+  const adicionando = idx === -1;
+  if (adicionando) carrinho.push(id);
   else carrinho.splice(idx, 1);
   renderGrid();
   atualizarBarra();
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  const p = produtos.find(x => x.id === id);
+  if (p) showToast(adicionando ? `"${p.nome}" adicionado` : `"${p.nome}" removido`);
 }
 
 function atualizarBarra() {
@@ -245,6 +264,21 @@ function atualizarBarra() {
   document.getElementById("progressoFill").style.width = pct + "%";
   document.getElementById("progressoTexto").textContent =
     itens.length === 0 ? "Nenhum item selecionado" : `${itens.length} ${itens.length === 1 ? "item" : "itens"} no carrinho`;
+}
+
+// ===================== TOAST =====================
+function showToast(msg) {
+  const existing = document.querySelector(".toast");
+  if (existing) existing.remove();
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add("visivel"));
+  setTimeout(() => {
+    toast.classList.remove("visivel");
+    setTimeout(() => toast.remove(), 300);
+  }, 2000);
 }
 
 // ===================== LIGHTBOX =====================
@@ -279,6 +313,19 @@ document.getElementById("modalFechar").addEventListener("click", fecharModal);
 document.getElementById("modalOverlay").addEventListener("click", e => {
   if (e.target === e.currentTarget) fecharModal();
 });
+document.getElementById("btnLimpar").addEventListener("click", () => {
+  carrinho = [];
+  localStorage.removeItem("carrinho");
+  renderGrid();
+  atualizarBarra();
+  fecharModal();
+});
+document.getElementById("nomeCliente").addEventListener("input", () => {
+  if (!document.getElementById("modalOverlay").classList.contains("aberto")) return;
+  const itens = carrinho.map(id => produtos.find(p => p.id === id)).filter(Boolean);
+  const soma = itens.reduce((s, p) => s + p.preco, 0);
+  document.getElementById("modalTexto").value = gerarTexto(itens, soma);
+});
 
 function abrirModal() {
   const itens = carrinho.map(id => produtos.find(p => p.id === id)).filter(Boolean);
@@ -292,18 +339,12 @@ function abrirModal() {
   document.getElementById("modalTotalValor").textContent = formatBRL(soma);
   document.getElementById("modalTexto").value = gerarTexto(itens, soma);
   document.getElementById("modalOverlay").classList.add("aberto");
-
-  document.getElementById("btnLimpar").onclick = () => {
-    carrinho = [];
-    localStorage.removeItem("carrinho");
-    renderGrid();
-    atualizarBarra();
-    fecharModal();
-  };
+  document.body.style.overflow = "hidden";
 }
 
 function fecharModal() {
   document.getElementById("modalOverlay").classList.remove("aberto");
+  document.body.style.overflow = "";
 }
 
 function gerarTexto(itens, soma) {
@@ -326,6 +367,13 @@ document.getElementById("btnCopiar").addEventListener("click", () => {
 document.getElementById("btnWhats").addEventListener("click", () => {
   const texto = document.getElementById("modalTexto").value;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, "_blank");
+});
+
+// ===================== TECLADO =====================
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if (document.getElementById("lightbox").classList.contains("aberto")) fecharLightbox();
+  else if (document.getElementById("modalOverlay").classList.contains("aberto")) fecharModal();
 });
 
 function formatBRL(v) {
