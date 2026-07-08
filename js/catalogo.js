@@ -1,4 +1,3 @@
-
 const WHATSAPP = "5551986489731";
 const NOME_LOJA = "Use Isis";
 const MAX_ITENS = 10;
@@ -74,13 +73,6 @@ function initBanner() {
   bannerTimer = setInterval(() => {
     irParaSlide((bannerAtual + 1) % slides.length);
   }, 4000);
-}
-  setTimeout(() => {
-    const allSlides = track.querySelectorAll(".banner-slide");
-    let maxH = 0;
-    allSlides.forEach(s => { if (s.offsetHeight > maxH) maxH = s.offsetHeight; });
-    allSlides.forEach(s => { s.style.height = maxH + "px"; });
-  }, 100);
 }
 
 function irParaSlide(idx) {
