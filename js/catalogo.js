@@ -53,7 +53,7 @@ function initBanner() {
   const dots = document.getElementById("bannerDots");
 
   track.innerHTML = slides.map(s => `
-    <div class="banner-slide" style="background:${s.bg};display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 40px;text-align:center;">
+    <div class="banner-slide" style="background:${s.bg};">
       <p style="font-size:10px;letter-spacing:4px;color:#D4A96A;text-transform:uppercase;margin:0 0 10px;font-family:'Inter',sans-serif;">${s.eyebrow}</p>
       <p style="font-family:'Playfair Display',serif;font-size:18px;color:#F5E6E0;margin:0 0 10px;line-height:1.4;">${s.titulo}</p>
       <p style="font-size:13px;color:#aaa;margin:0;line-height:1.6;font-family:'Inter',sans-serif;">${s.texto}</p>
